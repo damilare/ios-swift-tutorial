@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: Properties
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var mealNameLabel: UILabel!
+    @IBOutlet weak var photoImaageView: UIImageView!
     
     
     // MARK: Actions
@@ -26,8 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         nameTextField.delegate = self
     }
     
-    // MARK: TextField
-
+    // MARK: TextField  Delegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -37,5 +37,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
         mealNameLabel.text = textField.text
     }
 
+    @IBAction func selectImageFromPhotoLibrary(sender: UITapGestureRecognizer) {
+        nameTextField.resignFirstResponder()
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .PhotoLibrary
+        imagePickerController.delegate = self
+        presentViewController(imagePickerController, animated: true, completion: nil)
+
+    }
+    
+    // MARK: ImageField Delegate
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        photoImaageView.image = selectedImage
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
 }
 
