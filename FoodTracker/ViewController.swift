@@ -16,11 +16,9 @@ class ViewController: UIViewController, UITextFieldDelegate,UIImagePickerControl
     @IBOutlet weak var mealNameLabel: UILabel!
     @IBOutlet weak var photoImaageView: UIImageView!
     
+    @IBOutlet weak var ratingControl: RatingControl!
     
     // MARK: Actions
-    @IBAction func setDefaultlabelText(sender: UIButton) {
-        mealNameLabel.text = "Default Text"
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
